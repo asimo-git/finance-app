@@ -2,22 +2,18 @@ import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme/theme";
 import ExpenseList, { type Item } from "./components/ExpenseList";
-import { ActionRow, Amount, MainButton, Inner, Screen } from "./styles";
-
-// const MenuIcon = () => (
-//     <svg
-//         width="18"
-//         height="18"
-//         viewBox="0 0 24 24"
-//         fill="none"
-//         stroke="currentColor"
-//         strokeWidth="2"
-//     >
-//         <line x1="3" y1="6" x2="21" y2="6" />
-//         <line x1="3" y1="12" x2="21" y2="12" />
-//         <line x1="3" y1="18" x2="21" y2="18" />
-//     </svg>
-// );
+import {
+    ActionRow,
+    Amount,
+    MainButton,
+    Inner,
+    Screen,
+    MenuButton,
+    Header,
+    HeaderTitle,
+} from "./styles";
+import { Menu } from "lucide-react";
+import "./index.css";
 
 const SEED: Item[] = [
     { id: "1", label: "Upcoming Expenses", checked: true },
@@ -50,9 +46,13 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <Screen>
-                {/* <Nav>
-          <MenuButton aria-label="Menu"><MenuIcon /></MenuButton>
-        </Nav> */}
+                <Header>
+                    <HeaderTitle>Ваш ресурс</HeaderTitle>
+
+                    <MenuButton aria-label="Menu">
+                        <Menu size={18} />
+                    </MenuButton>
+                </Header>
                 <Inner>
                     <Amount>{balance}</Amount>
                     <ActionRow>

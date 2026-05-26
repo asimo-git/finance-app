@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check, Plus, X } from "lucide-react";
 import {
     AddButton,
     Card,
@@ -27,49 +28,6 @@ interface Props {
     onRemove: (id: string) => void;
 }
 
-/* ── CheckIcon ─────────────────────────────────────────────────────────── */
-const Check = () => (
-    <svg
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3"
-    >
-        <polyline points="20 6 9 17 4 12" />
-    </svg>
-);
-
-const Plus = () => (
-    <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-    >
-        <line x1="12" y1="5" x2="12" y2="19" />
-        <line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
-);
-
-const X = () => (
-    <svg
-        width="10"
-        height="10"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-    >
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-);
-
-/* ── Component ─────────────────────────────────────────────────────────── */
 export default function ExpenseList({
     items,
     onToggle,
@@ -110,14 +68,14 @@ export default function ExpenseList({
                         onClick={() => onToggle(item.id)}
                         aria-label="Отметить"
                     >
-                        {item.checked && <Check />}
+                        {item.checked && <Check size={12} strokeWidth={3} />}
                     </Checkbox>
                     <ItemLabel $checked={item.checked}>{item.label}</ItemLabel>
                     <RemoveButton
                         onClick={() => onRemove(item.id)}
                         aria-label="Удалить"
                     >
-                        <X />
+                        <X size={10} strokeWidth={2.5} />
                     </RemoveButton>
                 </Row>
             ))}
@@ -131,7 +89,7 @@ export default function ExpenseList({
                         placeholder="Название расхода…"
                     />
                     <SubmitButton type="submit" aria-label="Добавить">
-                        <Plus />
+                        <Plus size={14} strokeWidth={2.5} />
                     </SubmitButton>
                 </InputRow>
             )}

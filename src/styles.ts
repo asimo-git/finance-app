@@ -18,12 +18,21 @@ export const Inner = styled.div`
     align-items: stretch;
 `;
 
-export const Nav = styled.header`
+export const Header = styled.header`
     width: 100%;
     max-width: 430px;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px 16px 8px;
+`;
+
+export const HeaderTitle = styled.h1`
+    font-family: ${(p) => p.theme.fonts.display};
+    font-size: 30px;
+    font-weight: 700;
+    color: ${(p) => p.theme.colors.orangeDark};
+    margin: 0;
 `;
 
 export const MenuButton = styled.button`
