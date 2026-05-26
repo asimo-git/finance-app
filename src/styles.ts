@@ -119,11 +119,13 @@ export const Title = styled.h2`
     color: ${(p) => p.theme.colors.ink};
 `;
 
-export const AddButton = styled.button`
-    width: 32px;
-    height: 32px;
-    border-radius: ${(p) => p.theme.radius.full};
-    background: ${(p) => p.theme.colors.orange};
+export const SecondButton = styled.button<{
+    $bg?: string;
+}>`
+    width: 38px;
+    height: 38px;
+    border-radius: ${(p) => p.theme.radius.lg};
+    background: ${(p) => p.$bg || p.theme.colors.orange};
     border: none;
     cursor: pointer;
     display: flex;
@@ -138,6 +140,7 @@ export const AddButton = styled.button`
     &:active {
         transform: scale(0.92);
     }
+
     &:hover {
         opacity: 0.7;
     }
@@ -185,6 +188,7 @@ export const ItemLabel = styled.span<{ $checked: boolean }>`
         p.$checked ? p.theme.colors.inkMuted : p.theme.colors.ink};
     text-decoration: ${(p) => (p.$checked ? "line-through" : "none")};
     transition: color 140ms;
+    text-align: start;
 `;
 
 export const RemoveButton = styled.button`
@@ -226,6 +230,7 @@ export const InputRow = styled.form`
 
 export const TextInput = styled.input`
     flex: 1;
+    min-width: 0;
     font-family: ${(p) => p.theme.fonts.body};
     font-size: 14px;
     color: ${(p) => p.theme.colors.ink};
@@ -244,34 +249,73 @@ export const TextInput = styled.input`
     }
 `;
 
-export const SubmitButton = styled.button`
-    flex-shrink: 0;
-    width: 38px;
-    height: 38px;
-    border-radius: ${(p) => p.theme.radius.lg};
-    background: ${(p) => p.theme.colors.ink};
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    transition:
-        opacity 120ms,
-        transform 80ms;
-
-    &:active {
-        transform: scale(0.92);
-    }
-    &:hover {
-        opacity: 0.85;
-    }
-`;
-
 export const Empty = styled.p`
     font-family: ${(p) => p.theme.fonts.body};
     font-size: 13px;
     color: ${(p) => p.theme.colors.inkMuted};
     text-align: center;
     padding: 16px 0 4px;
+`;
+
+export const PriceLabel = styled.span`
+    font-size: 13px;
+    font-weight: 500;
+    color: ${(p) => p.theme.colors.inkMuted};
+    white-space: nowrap;
+`;
+
+export const PriceInput = styled.input`
+    width: 70px;
+    font-family: ${(p) => p.theme.fonts.body};
+    font-size: 14px;
+    color: ${(p) => p.theme.colors.ink};
+    background: ${(p) => p.theme.colors.surface};
+    border: 1.5px solid ${(p) => p.theme.colors.border};
+    border-radius: ${(p) => p.theme.radius.lg};
+    padding: 9px 10px;
+    outline: none;
+    transition: border-color 140ms;
+    &:focus {
+        border-color: ${(p) => p.theme.colors.ink};
+    }
+`;
+
+export const DropdownWrapper = styled.div`
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 0;
+    right: 100px;
+    background: ${(p) => p.theme.colors.white};
+    border: 1px solid ${(p) => p.theme.colors.border};
+    border-radius: ${(p) => p.theme.radius.lg};
+    z-index: 10;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+`;
+
+export const DropdownItem = styled.div`
+    padding: 10px 14px;
+    font-size: 14px;
+    color: ${(p) => p.theme.colors.ink};
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    &:hover {
+        background: ${(p) => p.theme.colors.surface};
+    }
+`;
+
+export const DropdownPrice = styled.span`
+    font-size: 12px;
+    color: ${(p) => p.theme.colors.inkMuted};
+    white-space: nowrap;
+`;
+
+export const InputRowRelative = styled.div`
+    display: flex;
+    gap: 8px;
+    position: relative;
+    width: 100%;
 `;
