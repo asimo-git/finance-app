@@ -1,0 +1,268 @@
+import styled from "styled-components";
+
+export const Screen = styled.div`
+    min-height: 100dvh;
+    background: ${(p) => p.theme.colors.mint};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const Inner = styled.div`
+    width: 100%;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    align-items: stretch;
+`;
+
+export const Nav = styled.header`
+    width: 100%;
+    max-width: 430px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 16px 8px;
+`;
+
+export const MenuButton = styled.button`
+    width: 42px;
+    height: 42px;
+    border-radius: ${(p) => p.theme.radius.md};
+    background: rgba(28, 28, 28, 0.08);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${(p) => p.theme.colors.ink};
+    transition: background 140ms;
+    &:hover {
+        background: rgba(28, 28, 28, 0.14);
+    }
+    &:active {
+        transform: scale(0.95);
+    }
+`;
+
+export const Amount = styled.h2`
+    font-family: ${(p) => p.theme.fonts.display};
+    font-size: clamp(44px, 12vw, 60px);
+    font-weight: 700;
+    color: ${(p) => p.theme.colors.ink};
+    letter-spacing: -2px;
+    line-height: 1;
+    text-align: center;
+`;
+
+export const ActionRow = styled.div`
+    display: flex;
+    gap: 16px;
+    margin: 0 auto;
+`;
+
+export const MainButton = styled.button<{ $variant: "dark" | "orange" }>`
+    width: 120px;
+    height: 40px;
+    border-radius: ${(p) => p.theme.radius.md};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${(p) =>
+        p.$variant === "dark" ? p.theme.colors.ink : p.theme.colors.orange};
+    color: #fff;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+    transition:
+        opacity 120ms,
+        transform 80ms;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    &:hover {
+        opacity: 0.7;
+    }
+    &:active {
+        transform: scale(0.93);
+    }
+`;
+
+/////////////////////////////////////////////////////////
+export const Card = styled.div`
+    background: ${(p) => p.theme.colors.white};
+    border-radius: ${(p) => p.theme.radius.xl};
+    padding: 20px;
+`;
+
+export const CardHeader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+`;
+
+export const Title = styled.h2`
+    font-family: ${(p) => p.theme.fonts.body};
+    font-size: 17px;
+    font-weight: 600;
+    color: ${(p) => p.theme.colors.ink};
+`;
+
+export const AddButton = styled.button`
+    width: 32px;
+    height: 32px;
+    border-radius: ${(p) => p.theme.radius.full};
+    background: ${(p) => p.theme.colors.orange};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition:
+        opacity 120ms,
+        transform 80ms;
+    flex-shrink: 0;
+
+    &:active {
+        transform: scale(0.92);
+    }
+    &:hover {
+        opacity: 0.7;
+    }
+`;
+
+export const Row = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid ${(p) => p.theme.colors.border};
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+`;
+
+export const Checkbox = styled.button<{ $checked: boolean }>`
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: ${(p) => p.theme.radius.sm};
+    border: 1.5px solid
+        ${(p) =>
+            p.$checked ? p.theme.colors.orange : p.theme.colors.borderStrong};
+    background: ${(p) =>
+        p.$checked ? p.theme.colors.orangePale : "transparent"};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 140ms;
+
+    &:active {
+        transform: scale(0.9);
+    }
+`;
+
+export const ItemLabel = styled.span<{ $checked: boolean }>`
+    font-family: ${(p) => p.theme.fonts.body};
+    font-size: 14px;
+    font-weight: 400;
+    flex: 1;
+    color: ${(p) =>
+        p.$checked ? p.theme.colors.inkMuted : p.theme.colors.ink};
+    text-decoration: ${(p) => (p.$checked ? "line-through" : "none")};
+    transition: color 140ms;
+`;
+
+export const RemoveButton = styled.button`
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: ${(p) => p.theme.radius.full};
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${(p) => p.theme.colors.inkMuted};
+    opacity: 0;
+    transition:
+        opacity 140ms,
+        color 140ms;
+
+    ${Row}:hover & {
+        opacity: 1;
+    }
+
+    &:hover {
+        color: #d9534f;
+    }
+    &:active {
+        transform: scale(0.88);
+    }
+`;
+
+export const InputRow = styled.form`
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid ${(p) => p.theme.colors.border};
+`;
+
+export const TextInput = styled.input`
+    flex: 1;
+    font-family: ${(p) => p.theme.fonts.body};
+    font-size: 14px;
+    color: ${(p) => p.theme.colors.ink};
+    background: ${(p) => p.theme.colors.surface};
+    border: 1.5px solid ${(p) => p.theme.colors.border};
+    border-radius: ${(p) => p.theme.radius.lg};
+    padding: 9px 14px;
+    outline: none;
+    transition: border-color 140ms;
+
+    &::placeholder {
+        color: ${(p) => p.theme.colors.inkMuted};
+    }
+    &:focus {
+        border-color: ${(p) => p.theme.colors.ink};
+    }
+`;
+
+export const SubmitButton = styled.button`
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: ${(p) => p.theme.radius.lg};
+    background: ${(p) => p.theme.colors.ink};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition:
+        opacity 120ms,
+        transform 80ms;
+
+    &:active {
+        transform: scale(0.92);
+    }
+    &:hover {
+        opacity: 0.85;
+    }
+`;
+
+export const Empty = styled.p`
+    font-family: ${(p) => p.theme.fonts.body};
+    font-size: 13px;
+    color: ${(p) => p.theme.colors.inkMuted};
+    text-align: center;
+    padding: 16px 0 4px;
+`;
