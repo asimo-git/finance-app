@@ -319,3 +319,28 @@ export const InputRowRelative = styled.div`
     position: relative;
     width: 100%;
 `;
+
+export const EditInput = styled.input`
+    flex: 1;
+    font-family: ${(p) => p.theme.fonts.body};
+    font-size: 14px;
+    color: ${(p) => p.theme.colors.ink};
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+`;
+
+export const EditPriceInput = styled(PriceInput)`
+    width: 72px;
+    padding: 5px 8px;
+    font-size: 13px;
+`;
+
+export const SaveButton = styled(MenuButton)`
+    width: 28px;
+    height: 28px;
+    border-radius: ${(p) => p.theme.radius.sm};
+    background: ${(p) => p.theme.colors.orangePale};
+    color: ${(p) => p.theme.colors.orange};
+`;
