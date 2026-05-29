@@ -17,11 +17,12 @@ import {
 } from "./styles";
 import { Menu } from "lucide-react";
 import "./index.css";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 type View = "main" | "presets";
 
 function App() {
-    const [balance, setBalance] = useState(100);
+    const [balance, setBalance] = useLocalStorage<number>("app:balance", 100);
     const [view, setView] = useState<View>("main");
     const [menuOpen, setMenuOpen] = useState(false);
     const { presets, add, remove, update } = usePresets();
