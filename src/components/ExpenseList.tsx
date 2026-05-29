@@ -15,6 +15,7 @@ import {
 import type { Item } from "../hooks/usePresets";
 import AddItemForm from "./AddItemForm";
 import { formatPrice } from "../helpers/helpers";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface Props {
     onToggle: (price: number) => void;
@@ -22,31 +23,15 @@ interface Props {
 }
 
 const SEED: Item[] = [
-    { id: "1", label: "Upcoming Expenses", checked: true, price: 100 },
-    { id: "2", label: "Full budget planner", checked: false, price: 100 },
-    { id: "3", label: "Easy tracking", checked: false, price: 100 },
-    { id: "4", label: "Smart notifications", checked: false, price: 100 },
-    { id: "5", label: "Multi-currency", checked: false, price: 100 },
-    { id: "6", label: "Multi-currency", checked: false, price: 100 },
-    { id: "7", label: "Multi-currency", checked: false, price: 100 },
-    { id: "8", label: "Multi-currency", checked: false, price: 100 },
-    { id: "9", label: "Multi-currency", checked: false, price: 100 },
+    { id: "1", label: "Помыть полы", checked: true, price: -10 },
+    { id: "2", label: "Встретиться с друзьями", checked: false, price: +90 },
 ];
 
-// --- пресеты ---
-// const PRESETS = [
-//     { label: "Аренда квартиры", price: 25000 },
-//     { label: "Продукты", price: 8000 },
-//     { label: "Транспорт", price: 3500 },
-//     { label: "Коммунальные услуги", price: 4200 },
-//     { label: "Интернет и связь", price: 900 },
-//     { label: "Спортзал", price: 2500 },
-//     { label: "Подписки", price: 1200 },
-//     { label: "Медицина", price: 3000 },
-// ];
-
 export default function ExpenseList({ onToggle, presets }: Props) {
-    const [items, setItems] = useState<Item[]>(SEED);
+    const [items, setItems] = useLocalStorage<Item[]>(
+        "app:expense-items",
+        SEED,
+    );
     const [open, setOpen] = useState(false);
 
     const handleToggle = (id: string, price: number) => {
@@ -58,6 +43,15 @@ export default function ExpenseList({ onToggle, presets }: Props) {
         onToggle(price);
     };
 
+    const handleOpen = () => {
+        setOpen(true);
+        requestAnimationFrame(() => {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+            });
+        });
+    };
+
     const handleRemove = (id: string) =>
         setItems((prev) => prev.filter((it) => it.id !== id));
 
@@ -65,12 +59,7 @@ export default function ExpenseList({ onToggle, presets }: Props) {
         <Card>
             <CardHeader>
                 <Title>Запланировано:</Title>
-                <SecondButton
-                    onClick={() => {
-                        setOpen((o) => !o);
-                    }}
-                    aria-label="Добавить"
-                >
+                <SecondButton onClick={handleOpen} aria-label="Добавить">
                     <Plus size={16} />
                 </SecondButton>
             </CardHeader>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 export interface Item {
     id: string;
@@ -8,18 +8,15 @@ export interface Item {
 }
 
 const DEFAULT_PRESETS: Item[] = [
-    { id: "1", label: "Аренда квартиры", price: 25000 },
-    { id: "2", label: "Продукты", price: 8000 },
-    { id: "3", label: "Транспорт", price: 3500 },
-    { id: "4", label: "Коммунальные услуги", price: 4200 },
-    { id: "5", label: "Интернет и связь", price: 900 },
-    { id: "6", label: "Спортзал", price: 2500 },
-    { id: "7", label: "Подписки", price: 1200 },
-    { id: "8", label: "Медицина", price: 3000 },
+    { id: "1", label: "Сходить на работу", price: -80 },
+    { id: "2", label: "Почитать", price: +40 },
 ];
 
 export function usePresets() {
-    const [presets, setPresets] = useState<Item[]>(DEFAULT_PRESETS);
+    const [presets, setPresets] = useLocalStorage<Item[]>(
+        "app:presets",
+        DEFAULT_PRESETS,
+    );
 
     const add = (label: string, price: number) =>
         setPresets((prev) => [
