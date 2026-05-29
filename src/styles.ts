@@ -65,14 +65,19 @@ export const Amount = styled.h2`
     text-align: center;
 `;
 
-export const ActionRow = styled.div`
+export const ActionRow = styled.div<{ $editing: boolean }>`
+    position: relative;
     display: flex;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    gap: ${(p) => (p.$editing ? "12px" : "0")};
+    min-height: 56px;
     margin: 0 auto;
+    transition: gap 320ms cubic-bezier(0.22, 1, 0.36, 1);
 `;
 
 export const MainButton = styled.button<{ $variant: "dark" | "orange" }>`
-    width: 120px;
+    width: 100px;
     height: 40px;
     border-radius: ${(p) => p.theme.radius.md};
     border: none;
@@ -95,6 +100,73 @@ export const MainButton = styled.button<{ $variant: "dark" | "orange" }>`
     }
     &:active {
         transform: scale(0.93);
+    }
+`;
+
+export const CollapsedButton = styled(MainButton)`
+    animation: collapseIn 320ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    @keyframes collapseIn {
+        from {
+            width: 56px;
+            opacity: 0;
+        }
+
+        to {
+            width: 100px;
+            opacity: 1;
+        }
+    }
+`;
+
+export const SideButton = styled(MainButton)`
+    width: 56px;
+
+    animation: sideAppear 320ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    @keyframes sideAppear {
+        from {
+            transform: scale(0.7);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+`;
+
+export const AmountInput = styled.input`
+    width: 0;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: ${(p) => p.theme.radius.md};
+    background: rgba(255, 255, 255, 0.72);
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: ${(p) => p.theme.colors.ink};
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    animation: growInput 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    @keyframes growInput {
+        from {
+            width: 0;
+            opacity: 0;
+            transform: scaleX(0.6);
+        }
+
+        to {
+            width: 120px;
+            opacity: 1;
+            transform: scaleX(1);
+        }
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.35);
     }
 `;
 

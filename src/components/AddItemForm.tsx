@@ -96,6 +96,7 @@ export default function AddItemForm({
                     value={draftPrice}
                     onChange={handlePriceChange}
                     placeholder="Цена"
+                    inputMode="numeric"
                 />
                 <SecondButton type="submit" aria-label="Добавить">
                     <Plus size={14} strokeWidth={2.5} />

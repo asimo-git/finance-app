@@ -6,9 +6,7 @@ import ExpenseList from "./components/ExpenseList";
 import MenuDrawer from "./components/MenuDrawer";
 import PresetsPage from "./components/PresetsPage";
 import {
-    ActionRow,
     Amount,
-    MainButton,
     Inner,
     Screen,
     MenuButton,
@@ -18,6 +16,7 @@ import {
 import { Menu } from "lucide-react";
 import "./index.css";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { QuantityControl } from "./components/QuantityControl";
 
 type View = "main" | "presets";
 
@@ -58,22 +57,9 @@ function App() {
 
                 <Inner>
                     <Amount>{balance}</Amount>
-                    <ActionRow>
-                        <MainButton
-                            $variant="dark"
-                            aria-label="Minus"
-                            onClick={() => setBalance((b) => b - 1000)}
-                        >
-                            −
-                        </MainButton>
-                        <MainButton
-                            $variant="orange"
-                            aria-label="Plus"
-                            onClick={() => setBalance((b) => b + 1000)}
-                        >
-                            +
-                        </MainButton>
-                    </ActionRow>
+                    <QuantityControl
+                        onChange={(delta) => setBalance((prev) => prev + delta)}
+                    />
 
                     <ExpenseList onToggle={handleToggle} presets={presets} />
                 </Inner>
