@@ -63,6 +63,18 @@ export const Amount = styled.h2`
     letter-spacing: -2px;
     line-height: 1;
     text-align: center;
+
+    &::after {
+        content: "";
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        background-image: url("/currency.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        vertical-align: middle;
+    }
 `;
 
 export const ActionRow = styled.div<{ $editing: boolean }>`

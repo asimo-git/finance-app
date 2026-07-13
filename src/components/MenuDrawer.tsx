@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Settings2 } from "lucide-react";
+import { HelpCircle, Settings2 } from "lucide-react";
+import type { View } from "../App";
 
 const Backdrop = styled.div<{ $visible: boolean }>`
     position: fixed;
@@ -77,10 +78,10 @@ const MenuItemSub = styled.span`
 interface Props {
     visible: boolean;
     onClose: () => void;
-    onOpenPresets: () => void;
+    onChooseItem: (item: View) => void;
 }
 
-export default function MenuDrawer({ visible, onClose, onOpenPresets }: Props) {
+export default function MenuDrawer({ visible, onClose, onChooseItem }: Props) {
     const drawerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -105,7 +106,7 @@ export default function MenuDrawer({ visible, onClose, onOpenPresets }: Props) {
                 <MenuItem
                     onClick={() => {
                         onClose();
-                        onOpenPresets();
+                        onChooseItem("presets");
                     }}
                 >
                     <MenuItemIcon>
@@ -116,6 +117,21 @@ export default function MenuDrawer({ visible, onClose, onOpenPresets }: Props) {
                         <MenuItemSub>
                             Настройте список быстрого выбора
                         </MenuItemSub>
+                    </div>
+                </MenuItem>
+
+                <MenuItem
+                    onClick={() => {
+                        onClose();
+                        onChooseItem("help");
+                    }}
+                >
+                    <MenuItemIcon>
+                        <HelpCircle size={18} />
+                    </MenuItemIcon>
+                    <div>
+                        <MenuItemLabel>Как этим пользоваться?</MenuItemLabel>
+                        <MenuItemSub>Введение в банк психоджоулей</MenuItemSub>
                     </div>
                 </MenuItem>
             </Drawer>

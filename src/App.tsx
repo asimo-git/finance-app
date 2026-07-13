@@ -17,8 +17,9 @@ import { Menu } from "lucide-react";
 import "./index.css";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { QuantityControl } from "./components/QuantityControl";
+import HelpPage from "./components/HelpPage";
 
-type View = "main" | "presets";
+export type View = "main" | "presets" | "help";
 
 function App() {
     const [balance, setBalance] = useLocalStorage<number>("app:balance", 100);
@@ -26,11 +27,12 @@ function App() {
     const [menuOpen, setMenuOpen] = useState(false);
     const { presets, add, remove, update } = usePresets();
 
-    const handleToggle = (price: number) => setBalance((b) => b + price);
+    const handleToggle = (price: number, checked: boolean) =>
+        setBalance((b) => (checked ? b + price : b - price));
 
-    if (view === "presets") {
-        return (
-            <ThemeProvider theme={theme}>
+    return (
+        <ThemeProvider theme={theme}>
+            {view === "presets" && (
                 <PresetsPage
                     presets={presets}
                     onAdd={add}
@@ -38,38 +40,43 @@ function App() {
                     onUpdate={update}
                     onBack={() => setView("main")}
                 />
-            </ThemeProvider>
-        );
-    }
+            )}
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Screen>
-                <Header>
-                    <HeaderTitle>Ваш ресурс</HeaderTitle>
-                    <MenuButton
-                        aria-label="Menu"
-                        onClick={() => setMenuOpen(true)}
-                    >
-                        <Menu size={18} />
-                    </MenuButton>
-                </Header>
+            {view === "main" && (
+                <Screen>
+                    <Header>
+                        <HeaderTitle>Ваш ресурс</HeaderTitle>
+                        <MenuButton
+                            aria-label="Menu"
+                            onClick={() => setMenuOpen(true)}
+                        >
+                            <Menu size={18} />
+                        </MenuButton>
+                    </Header>
 
-                <Inner>
-                    <Amount>{balance}</Amount>
-                    <QuantityControl
-                        onChange={(delta) => setBalance((prev) => prev + delta)}
+                    <Inner>
+                        <Amount>{balance}</Amount>
+                        <QuantityControl
+                            onChange={(delta) =>
+                                setBalance((prev) => prev + delta)
+                            }
+                        />
+
+                        <ExpenseList
+                            onToggle={handleToggle}
+                            presets={presets}
+                        />
+                    </Inner>
+
+                    <MenuDrawer
+                        visible={menuOpen}
+                        onClose={() => setMenuOpen(false)}
+                        onChooseItem={(item) => setView(item)}
                     />
+                </Screen>
+            )}
 
-                    <ExpenseList onToggle={handleToggle} presets={presets} />
-                </Inner>
-
-                <MenuDrawer
-                    visible={menuOpen}
-                    onClose={() => setMenuOpen(false)}
-                    onOpenPresets={() => setView("presets")}
-                />
-            </Screen>
+            {view === "help" && <HelpPage onBack={() => setView("main")} />}
         </ThemeProvider>
     );
 }

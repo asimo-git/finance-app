@@ -18,7 +18,7 @@ import { formatPrice } from "../helpers/helpers";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface Props {
-    onToggle: (price: number) => void;
+    onToggle: (price: number, checked: boolean) => void;
     presets: Item[];
 }
 
@@ -34,13 +34,11 @@ export default function ExpenseList({ onToggle, presets }: Props) {
     );
     const [open, setOpen] = useState(false);
 
-    const handleToggle = (id: string, price: number) => {
+    const handleToggle = (id: string, price: number, checked: boolean) => {
         setItems((prev) =>
-            prev.map((it) =>
-                it.id === id ? { ...it, checked: !it.checked } : it,
-            ),
+            prev.map((it) => (it.id === id ? { ...it, checked } : it)),
         );
-        onToggle(price);
+        onToggle(price, checked);
     };
 
     const handleOpen = () => {
@@ -72,7 +70,9 @@ export default function ExpenseList({ onToggle, presets }: Props) {
                 <Row key={item.id}>
                     <Checkbox
                         $checked={Boolean(item.checked)}
-                        onClick={() => handleToggle(item.id, item.price)}
+                        onClick={() =>
+                            handleToggle(item.id, item.price, !item.checked)
+                        }
                         aria-label="Отметить"
                     >
                         {item.checked && <Check size={12} strokeWidth={3} />}
